@@ -1,0 +1,10 @@
+# Dependencies
+.psci_modules
+.spago
+bower_components
+node_modules
+config.json
+
+# Generated files
+.psci
+output
