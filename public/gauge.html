@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice Activity Gauge</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  </style>
+</head>
+<body>
+  
+  <div id="gauge-container">
+    <!-- Replace these src attributes with paths to your assets -->
+    <img id="gauge" src="gauge.png" alt="Gauge">
+  </div>
+  <div id="pointer-container">
+    <img id="pointer" src="pointer.png" alt="Pointer">
+  </div>
+
+  <div id="decibel-display">Decibels: -- dB</div>
+  
+  <!-- Include Socket.IO client library -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    socket.on('connect', () => {
+      console.log('Socket connected, id:', socket.id);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected');
+    });
+
+    socket.on('connect_error', (error) => {
+      console.error('Connection error:', error);
+    });
+
+    const pointer = document.getElementById('pointer');
+    const decibelDisplay = document.getElementById('decibel-display');
+
+    function mapDecibelsToAngle(db) {
+      const clamped = Math.max(55, Math.min(db, 80)); // Clamp between 40 and 100 dB
+      return (((clamped - 55) * 7.2) - 90); // Map 40db to -90deg and 100db to 90deg
+    }
+
+    socket.on('volumeUpdate', (db) => {
+      console.log('Received volumeUpdate:', db);
+      const angle = mapDecibelsToAngle(db);
+      pointer.style.transform = `translate(0%, 0%) rotate(${angle}deg)`;
+      decibelDisplay.textContent = `Decibels: ${db.toFixed(2)} dB`;
+    });
+  </script>
+</body>
+</html>

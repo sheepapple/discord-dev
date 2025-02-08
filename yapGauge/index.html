@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smooth Rotating Gauge</title>
+</head>
+<body>
+  <div id="gauge-container">
+    <img id="gauge" src="assets/yapGauge.png" alt="Gauge">
+    <img id="pointer" src="assets/YapGaugeHand.png" alt="Pointer">
+  </div>
+  <input type="range" id="slider" min="0" max="360" step="1" value="0">
+  
+  <script>
+    // Get references to the slider and pointer elements
+    const slider = document.getElementById('slider');
+    const pointer = document.getElementById('pointer');
+
+    // Listen for slider changes
+    slider.addEventListener('input', () => {
+      // Get the angle value from the slider
+      const angle = slider.value;
+      // Update the pointer rotation using CSS transform.
+      pointer.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+    });
+  </script>
+</body>
+</html>

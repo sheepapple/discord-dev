@@ -1,0 +1,71 @@
+/* Reset and basic styling */
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 150%;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+  }
+  
+  /* Basic page styling */
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: lightgoldenrodyellow;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Container for the gauge elements scaled up to 400% */
+  #gauge-container {
+    position: relative;
+    width: 1200px; /* 400% of original 300px */
+    height: 1200px; /* 400% of original 300px */
+  }
+
+  /* The gauge face (e.g., with markings) */
+  #gauge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  /* The gauge pointer (hand) */
+  #pointer {
+    position: absolute;
+    top: 61%;
+    left: 50%;
+    width: 32%;
+    height: 37%;
+    object-fit: contain;
+    pointer-events: none;
+    /* Adjust transform-origin to move the axis of rotation down */
+    transform-origin: 50% 91%; 
+    transform: translate(-50%, -50%) rotate(-90deg);
+    transition: transform 0.2s ease-out;
+  }
+
+  /* The slider styling scaled up to match the gauge */
+  #slider {
+    margin-top: 200px;
+    opacity: 0;
+    position: absolute;
+    width: 1200px; /* 400% of original 300px */
+  }
+  
